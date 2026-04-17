@@ -16,6 +16,9 @@ func Readfile(filename string) string {
 	redata := string(data)
 	return redata
 }
+func Captializefirst(word string) string {
+	return strings.ToUpper(string(word[0])) + word[1:]
+}
 
 func main() {
 	Value := Readfile("sample.txt")
@@ -28,11 +31,31 @@ func main() {
 			previousword := finaldata[i-1]
 			upperword := strings.ToUpper(previousword)
 			result = append(result[:len(result)-1], upperword)
+			continue
+		case "(low)":
+			previousword := finaldata[i-1]
+			lowerword := strings.ToLower(previousword)
+			result = append(result[:len(result)-1], lowerword)
+			continue
+		case "(cap)":
+			previousword := finaldata[i-1]
+			capword := Captializefirst(previousword)
+			result = append(result[:len(result)-1], capword)
 		default:
 			result = append(result, finaldata[i])
 		}
+
 	}
+	// for i := 0; i < len(finaldata); i++ {
+	// 	switch finaldata[i] {
+	// 	case "(low)":
+	// 		oldword := finaldata[i-1]
+	// 		lowerword := strings.ToLower(oldword)
+	// 		result = append(result[:len(result)-1], lowerword)
+	// 	default:
+	// 		result = append(result, finaldata[i])
+	// 	}
+	// }
 
 	fmt.Println(result)
-
 }
